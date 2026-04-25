@@ -12,6 +12,6 @@ class Program
 
         string fullName = firstName + " " + lastName;
 
-        Console.WriteLine("\nYour name is " + lastName + ", " + fullName);
+        Console.WriteLine($"\nYour name is {lastName}, {fullName}");
     }
 }
