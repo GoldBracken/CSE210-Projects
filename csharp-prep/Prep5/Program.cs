@@ -59,7 +59,7 @@ class Program
     }
 
     /*
-        Display the user's name, squared number, and how many years old they will turn will turn.
+        Display the user's name, squared number, and how many years old they will turn will turn this year.
         Parameters: string name, int i, int birthYr
         returns: void
     */
