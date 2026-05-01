@@ -1,5 +1,4 @@
 using System;
-using System.Security.Cryptography.X509Certificates;
 
 class Program
 {
@@ -60,7 +59,7 @@ class Program
     }
 
     /*
-        Display the user's name, squared number, and how many years old they will turn.
+        Display the user's name, squared number, and how many years old they will turn will turn.
         Parameters: string name, int i, int birthYr
         returns: void
     */
