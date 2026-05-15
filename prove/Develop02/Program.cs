@@ -1,3 +1,10 @@
+/*
+ Exceeding: Added a functionality where the user can now save the files by only giving a file name 
+ instead of needing to include ".txt" in it (line 100-103). I modified the load case (case 3) to display 
+ the existing journals that a user can choose from and load, again without needing to include 
+ the ".txt" extension in the chosen journals name (line 67-74).
+*/
+
 using System;
 using System.IO;
 using System.IO.Enumeration;
@@ -56,12 +63,18 @@ class Program
                 //with entry values saved in the given file on each line.
                 case 3:
                     Console.WriteLine("Which journal would you like to load? ");
+
+                    //Displays options for which journals are available to load
                     for(int i = 0; i < _journals.Count(); i++)
                     {
                         Console.WriteLine($"{_journals[i]}");
                     }
+
+                    //Takes user inputted string and adds proper extension to use as file name.
                     _fileName = Console.ReadLine() + ".txt";
                     _lines = System.IO.File.ReadAllLines(_fileName);
+
+                    //clears current values in Journal _j so the loaded journal will populate _j instead.
                     _j._entries.Clear();
                     foreach (string line in _lines)
                     {
@@ -83,6 +96,7 @@ class Program
                 //already exist. Iterates through Journal _j entries, writing each entry as a date|prompt|entry
                 //on each line.
                 case 4:
+                    //User inputs file name which is then added to _journals and given the ".txt" type in the _fileName variable
                     Console.WriteLine("What is the file name? (Example: journal1)");
                     _fileName = Console.ReadLine();
                     string journalName = _fileName;
