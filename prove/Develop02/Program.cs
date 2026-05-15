@@ -7,7 +7,7 @@ class Program
     static void Main(string[] args)
     {
         int _userChoice = -1;
-        Random rand = new Random();
+        Random _rand = new Random();
 
         List<string> _prompts = ["What was the thing I most enjoyed doing today?", "What do I wish I could have done better today?",
         "What miracle did I see today?", "Who did I help today?", "What was something I think I did well today?", "What was I grateful for today?"];
@@ -16,6 +16,12 @@ class Program
         Journal _j = new Journal();
         Entry _userEntry = new Entry();
 
+        List<string> _journals = new List<string>();
+        string[] _files = System.IO.Directory.GetFiles("./", "*.txt");
+        foreach(string file in _files)
+        {
+            _journals.Add(file.Split("/")[1].Split(".")[0]);
+        }
         string _fileName = "myFile.txt";
         string[] _lines;
 
@@ -35,7 +41,7 @@ class Program
                 //user-inputed values, it appends it to the _entries list in Journal _j.
                 case 1:
                     _userEntry = new Entry();
-                    _userEntry._prompt = _prompts[rand.Next(_prompts.Count)];
+                    _userEntry._prompt = _prompts[_rand.Next(_prompts.Count)];
                     _userEntry._currDate = _currentDate;
                     _userEntry.WriteEntry();
                     _j._entries.Add(_userEntry);
@@ -46,25 +52,29 @@ class Program
                     _j.DisplayEntries();
                     break;
 
-                //Asks user for file name of journal. Reads the given file name and overrides current journal
+                //Asks user for journal name. Reads the given journal name and overrides current journal
                 //with entry values saved in the given file on each line.
                 case 3:
-                    Console.WriteLine("What is the file name? ");
-                    _fileName = Console.ReadLine();
+                    Console.WriteLine("Which journal would you like to load? ");
+                    for(int i = 0; i < _journals.Count(); i++)
+                    {
+                        Console.WriteLine($"{_journals[i]}");
+                    }
+                    _fileName = Console.ReadLine() + ".txt";
                     _lines = System.IO.File.ReadAllLines(_fileName);
                     _j._entries.Clear();
                     foreach (string line in _lines)
                     {
                         string[] parts = line.Split("|");
 
-                        string date = parts[0];
-                        string prompt = parts[1];
-                        string entry = parts[2];
+                        string _eDate = parts[0];
+                        string _ePrompt = parts[1];
+                        string _eEntry = parts[2];
 
                         Entry _entry = new Entry();
-                        _entry._currDate = date;
-                        _entry._prompt = prompt;
-                        _entry._entry = entry;
+                        _entry._currDate = _eDate;
+                        _entry._prompt = _ePrompt;
+                        _entry._entry = _eEntry;
                         _j._entries.Add(_entry);
                     }
                     break;
@@ -73,8 +83,11 @@ class Program
                 //already exist. Iterates through Journal _j entries, writing each entry as a date|prompt|entry
                 //on each line.
                 case 4:
-                    Console.WriteLine("What is the file name? ");
+                    Console.WriteLine("What is the file name? (Example: journal1)");
                     _fileName = Console.ReadLine();
+                    string journalName = _fileName;
+                    _fileName += ".txt";
+                    _journals.Add(journalName);
                     using (StreamWriter outputFile = new StreamWriter(_fileName))
                     {
                         foreach(Entry e in _j._entries)
