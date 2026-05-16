@@ -25,9 +25,9 @@ class Program
 
         List<string> _journals = new List<string>();
         string[] _files = System.IO.Directory.GetFiles("./", "*.txt");
-        foreach(string file in _files)
+        foreach(string _file in _files)
         {
-            _journals.Add(file.Split("/")[1].Split(".")[0]);
+            _journals.Add(_file.Split("/")[1].Split(".")[0]);
         }
         string _fileName = "myFile.txt";
         string[] _lines;
@@ -78,11 +78,11 @@ class Program
                     _j._entries.Clear();
                     foreach (string line in _lines)
                     {
-                        string[] parts = line.Split("|");
+                        string[] _parts = line.Split("|");
 
-                        string _eDate = parts[0];
-                        string _ePrompt = parts[1];
-                        string _eEntry = parts[2];
+                        string _eDate = _parts[0];
+                        string _ePrompt = _parts[1];
+                        string _eEntry = _parts[2];
 
                         Entry _entry = new Entry();
                         _entry._currDate = _eDate;
@@ -99,14 +99,14 @@ class Program
                     //User inputs file name which is then added to _journals and given the ".txt" type in the _fileName variable
                     Console.WriteLine("What is the file name? (Example: journal1)");
                     _fileName = Console.ReadLine();
-                    string journalName = _fileName;
+                    string _journalName = _fileName;
                     _fileName += ".txt";
-                    _journals.Add(journalName);
+                    _journals.Add(_journalName);
                     using (StreamWriter outputFile = new StreamWriter(_fileName))
                     {
-                        foreach(Entry e in _j._entries)
+                        foreach(Entry _e in _j._entries)
                         {
-                            outputFile.WriteLine($"{e._currDate}|{e._prompt}|{e._entry}");
+                            outputFile.WriteLine($"{_e._currDate}|{_e._prompt}|{_e._entry}");
                         }
                     }
                     break;

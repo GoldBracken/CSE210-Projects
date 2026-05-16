@@ -20,14 +20,17 @@ class Program
         
         Console.WriteLine(job2._company);
 
-        job1.Display();
-        job2.Display();
+        //job1.Display();
+        //job2.Display();
+
+        Console.WriteLine(job1);
+        Console.WriteLine(job2);
 
         Resume myResume = new Resume();
         myResume._name = "John Smith";
         myResume._jobs = [job1, job2];
 
-        myResume.Display();
+        Console.WriteLine(myResume);
 
     }
 }

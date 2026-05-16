@@ -4,8 +4,8 @@ public class Job {
     public int _startYear;
     public int _endYear;
 
-    public void Display()
+    public override string ToString()
     {
-        Console.WriteLine($"{_jobTitle} ({_company}) {_startYear}-{_endYear}.");
+        return $"{_jobTitle} ({_company}) {_startYear}-{_endYear}.";
     }
 }
