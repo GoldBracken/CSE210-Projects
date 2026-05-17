@@ -13,50 +13,50 @@ class Program
 {
     static void Main(string[] args)
     {
-        int _userChoice = -1;
-        Random _rand = new Random();
+        int userChoice = -1;
+        Random rand = new Random();
 
-        List<string> _prompts = ["What was the thing I most enjoyed doing today?", "What do I wish I could have done better today?",
+        List<string> prompts = ["What was the thing I most enjoyed doing today?", "What do I wish I could have done better today?",
         "What miracle did I see today?", "Who did I help today?", "What was something I think I did well today?", "What was I grateful for today?"];
         
-        string _currentDate = $"{DateTime.Now.Month}/{DateTime.Now.Day}/{DateTime.Now.Year}";
-        Journal _j = new Journal();
-        Entry _userEntry = new Entry();
+        string currentDate = $"{DateTime.Now.Month}/{DateTime.Now.Day}/{DateTime.Now.Year}";
+        Journal j = new Journal();
+        Entry userEntry = new Entry();
 
-        List<string> _journals = new List<string>();
-        string[] _files = System.IO.Directory.GetFiles("./", "*.txt");
-        foreach(string _file in _files)
+        List<string> journals = new List<string>();
+        string[] files = System.IO.Directory.GetFiles("./", "*.txt");
+        foreach(string file in files)
         {
-            _journals.Add(_file.Split("/")[1].Split(".")[0]);
+            journals.Add(file.Split("/")[1].Split(".")[0]);
         }
-        string _fileName = "myFile.txt";
-        string[] _lines;
+        string fileName = "myFile.txt";
+        string[] lines;
 
         Console.WriteLine("Welcome to the Journal Program!");
 
         // Loops while the user has not chosen option 5.
-        while(_userChoice != 5)
+        while(userChoice != 5)
         {
             Console.WriteLine("Please select one of the following choices:\n1. Write\n2. Display\n3. Load\n4. Save\n5. Quit");
             Console.Write("What would you like to do? ");
-            _userChoice = int.Parse(Console.ReadLine());
+            userChoice = int.Parse(Console.ReadLine());
 
             // Switch case for the 5 options given to the user.
-            switch (_userChoice)
+            switch (userChoice)
             {
                 // Creates a new Entry and has the user populate it. Once all variables have been populated with
-                //user-inputed values, it appends it to the _entries list in Journal _j.
+                //user-inputed values, it appends it to the entries list in Journal j.
                 case 1:
-                    _userEntry = new Entry();
-                    _userEntry._prompt = _prompts[_rand.Next(_prompts.Count)];
-                    _userEntry._currDate = _currentDate;
-                    _userEntry.WriteEntry();
-                    _j._entries.Add(_userEntry);
+                    userEntry = new Entry();
+                    userEntry._prompt = prompts[rand.Next(prompts.Count)];
+                    userEntry._currDate = currentDate;
+                    userEntry.WriteEntry();
+                    j._entries.Add(userEntry);
                     break;
 
-                //Calls the DisplayEntries method on Journal _j and displays all entries to console.
+                //Calls the DisplayEntries method on Journal j and displays all entries to console.
                 case 2:
-                    _j.DisplayEntries();
+                    j.DisplayEntries();
                     break;
 
                 //Asks user for journal name. Reads the given journal name and overrides current journal
@@ -65,48 +65,48 @@ class Program
                     Console.WriteLine("Which journal would you like to load? ");
 
                     //Displays options for which journals are available to load
-                    for(int i = 0; i < _journals.Count(); i++)
+                    for(int i = 0; i < journals.Count(); i++)
                     {
-                        Console.WriteLine($"{_journals[i]}");
+                        Console.WriteLine($"{journals[i]}");
                     }
 
                     //Takes user inputted string and adds proper extension to use as file name.
-                    _fileName = Console.ReadLine() + ".txt";
-                    _lines = System.IO.File.ReadAllLines(_fileName);
+                    fileName = Console.ReadLine() + ".txt";
+                    lines = System.IO.File.ReadAllLines(fileName);
 
-                    //clears current values in Journal _j so the loaded journal will populate _j instead.
-                    _j._entries.Clear();
-                    foreach (string line in _lines)
+                    //clears current values in Journal j so the loaded journal will populate j instead.
+                    j._entries.Clear();
+                    foreach (string line in lines)
                     {
-                        string[] _parts = line.Split("|");
+                        string[] parts = line.Split("|");
 
-                        string _eDate = _parts[0];
-                        string _ePrompt = _parts[1];
-                        string _eEntry = _parts[2];
+                        string eDate = parts[0];
+                        string ePrompt = parts[1];
+                        string eEntry = parts[2];
 
-                        Entry _entry = new Entry();
-                        _entry._currDate = _eDate;
-                        _entry._prompt = _ePrompt;
-                        _entry._entry = _eEntry;
-                        _j._entries.Add(_entry);
+                        Entry entry = new Entry();
+                        entry._currDate = eDate;
+                        entry._prompt = ePrompt;
+                        entry._entry = eEntry;
+                        j._entries.Add(entry);
                     }
                     break;
 
                 //Asks for file name from user. Searches for file, creates one with user name if it doesn't
-                //already exist. Iterates through Journal _j entries, writing each entry as a date|prompt|entry
+                //already exist. Iterates through Journal j entries, writing each entry as a date|prompt|entry
                 //on each line.
                 case 4:
-                    //User inputs file name which is then added to _journals and given the ".txt" type in the _fileName variable
+                    //User inputs file name which is then added to journals and given the ".txt" type in the fileName variable
                     Console.WriteLine("What is the file name? (Example: journal1)");
-                    _fileName = Console.ReadLine();
-                    string _journalName = _fileName;
-                    _fileName += ".txt";
-                    _journals.Add(_journalName);
-                    using (StreamWriter outputFile = new StreamWriter(_fileName))
+                    fileName = Console.ReadLine();
+                    string journalName = fileName;
+                    fileName += ".txt";
+                    journals.Add(journalName);
+                    using (StreamWriter outputFile = new StreamWriter(fileName))
                     {
-                        foreach(Entry _e in _j._entries)
+                        foreach(Entry e in j._entries)
                         {
-                            outputFile.WriteLine($"{_e._currDate}|{_e._prompt}|{_e._entry}");
+                            outputFile.WriteLine($"{e._currDate}|{e._prompt}|{e._entry}");
                         }
                     }
                     break;
