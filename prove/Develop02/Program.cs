@@ -30,7 +30,6 @@ class Program
             journals.Add(file.Split("/")[1].Split(".")[0]);
         }
         string fileName = "myFile.txt";
-        string[] lines;
 
         Console.WriteLine("Welcome to the Journal Program!");
 
@@ -72,24 +71,7 @@ class Program
 
                     //Takes user inputted string and adds proper extension to use as file name.
                     fileName = Console.ReadLine() + ".txt";
-                    lines = System.IO.File.ReadAllLines(fileName);
-
-                    //clears current values in Journal j so the loaded journal will populate j instead.
-                    j._entries.Clear();
-                    foreach (string line in lines)
-                    {
-                        string[] parts = line.Split("|");
-
-                        string eDate = parts[0];
-                        string ePrompt = parts[1];
-                        string eEntry = parts[2];
-
-                        Entry entry = new Entry();
-                        entry._currDate = eDate;
-                        entry._prompt = ePrompt;
-                        entry._entry = eEntry;
-                        j._entries.Add(entry);
-                    }
+                    j.LoadJournal(fileName);
                     break;
 
                 //Asks for file name from user. Searches for file, creates one with user name if it doesn't
@@ -102,13 +84,7 @@ class Program
                     string journalName = fileName;
                     fileName += ".txt";
                     journals.Add(journalName);
-                    using (StreamWriter outputFile = new StreamWriter(fileName))
-                    {
-                        foreach(Entry e in j._entries)
-                        {
-                            outputFile.WriteLine($"{e._currDate}|{e._prompt}|{e._entry}");
-                        }
-                    }
+                    j.SaveJournal(fileName);
                     break;
                 //Breaks out of loop
                 case 5:
