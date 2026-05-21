@@ -18,7 +18,7 @@ public class Fraction
     public Fraction (int numerator, int denominator)
     {
         _numerator = numerator;
-        _denominator = denominator;
+        SetDenominator(denominator);
     }
 
     public int GetNumerator()
@@ -38,7 +38,14 @@ public class Fraction
 
     public void SetDenominator(int denominator)
     {
-        _denominator = denominator;
+        if (denominator != 0)
+        {
+            _denominator = denominator;
+        }
+        else
+        {
+            _denominator = 1;
+        }
     }
 
     public string GetFractionString()
@@ -48,7 +55,7 @@ public class Fraction
 
     public double GetDecimalValue()
     {
-        return Convert.ToDouble(_numerator) / Convert.ToDouble(_denominator);
+        return (double)_numerator / (double)_denominator;
     }
 
     public override string ToString()
