@@ -50,4 +50,9 @@ public class Fraction
     {
         return Convert.ToDouble(_numerator) / Convert.ToDouble(_denominator);
     }
+
+    public override string ToString()
+    {
+        return $"{_numerator} / {_denominator}";
+    }
 }
