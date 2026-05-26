@@ -25,7 +25,7 @@ class Program
             }
             
             Console.Clear();
-            Console.WriteLine(proverbs.GetReferenceString() + " " + proverbs.GetScriptureTextString());
+            Console.WriteLine(proverbs.GetScriptureString());
             Console.WriteLine("Press enter to continue or type 'quit' to finish: ");
             userInput = Console.ReadLine();
 

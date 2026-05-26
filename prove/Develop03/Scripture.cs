@@ -14,6 +14,11 @@ public class Scripture
         SetScriptureText(text);
     }
 
+    public string GetScriptureString()
+    {
+        return this.GetReferenceString() + " " + this.GetScriptureTextString();
+    }
+
   public string GetScriptureTextString() {
     string words = "";
     foreach(Word word in _text)
@@ -41,6 +46,11 @@ public class Scripture
     public string GetReferenceString()
     {
         return _reference.GetReferenceString();
+    }
+
+    public void SetReference(Reference reference)
+    {
+        _reference = reference;
     }
 
     public void HideWords()
