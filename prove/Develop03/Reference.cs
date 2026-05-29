@@ -8,7 +8,7 @@ public class Reference
     {
         _book = book;
         _chapter = chapt;
-        _verses.Add(verse);
+        _verses = new List<int>{verse};
     }
 
     public Reference(string book, int chapt, List<int> verse)
@@ -22,7 +22,7 @@ public class Reference
     {
         if(_verses.Count == 1)
         {
-            return $"{_book} {_chapter}:{_verses}";
+            return $"{_book} {_chapter}:{_verses[0]}";
         }
         else
         {

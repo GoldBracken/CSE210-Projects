@@ -70,10 +70,19 @@ public class Scripture
                     }
                     n++;
                 }
-            index = indexes[rand.Next(0, indexes.Count - 1)];
-            _text[index].HideWord();
+            if(indexes.Count < 3)
+            {
+                foreach(Word word in _text)
+                {
+                    word.HideWord();
+                }
+            }
+            else
+            {
+                index = indexes[rand.Next(0, indexes.Count - 1)];
+                _text[index].HideWord();
+            }
             
-           
         }
     }
 }
