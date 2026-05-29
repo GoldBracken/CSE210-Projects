@@ -5,7 +5,7 @@ public class Word
     public void HideWord()
     {
         string hiddenWord = "";
-        for(int i = 0; i < _word.Length; i++)
+        for (int i = 0; i < _word.Length; i++)
         {
             hiddenWord += "_";
         }

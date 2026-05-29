@@ -8,7 +8,7 @@ public class Reference
     {
         _book = book;
         _chapter = chapt;
-        _verses = new List<int>{verse};
+        _verses = new List<int> { verse };
     }
 
     public Reference(string book, int chapt, List<int> verse)
@@ -20,7 +20,7 @@ public class Reference
 
     public string GetReferenceString()
     {
-        if(_verses.Count == 1)
+        if (_verses.Count == 1)
         {
             return $"{_book} {_chapter}:{_verses[0]}";
         }
@@ -28,7 +28,7 @@ public class Reference
         {
             return $"{_book} {_chapter}:{_verses[0]}-{_verses.Last()}";
         }
-        
+
     }
 
     public string GetBook()
