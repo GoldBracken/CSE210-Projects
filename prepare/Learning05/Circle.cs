@@ -8,6 +8,6 @@ public class Circle : Shape
 
     public override float GetArea()
     {
-        return ((float)Math.PI*_radius*_radius)/2;
+        return (float)Math.PI*_radius*_radius;
     }
 }
